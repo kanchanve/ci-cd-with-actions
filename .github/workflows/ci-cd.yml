@@ -1,4 +1,4 @@
-name: React App CI-CD
+name: React App CI/CD
 
 on:
   push:
@@ -9,7 +9,11 @@ on:
     branches: 
     - main 
     - releases/*
-
+    
+env:
+  owner: kanchanve
+  domain: github.io
+  
 jobs:
   build-test:
     name: Build and test
@@ -30,10 +34,6 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    
-env:
-  owner: kanchanve
-  domain: github.io
 
   deploy-dev-test:
     name: Deploy to Dev test environment
@@ -80,7 +80,7 @@ env:
           token: ${{ secrets.TOKEN }}
           repository-name: ${{ env.owner }}/${{ env.repo }}
 
- publish-gpr:
+  publish-gpr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
